@@ -35,6 +35,7 @@ export const TweetSchema = new Schema<ITweet>(
         id: {
           type: String,
         },
+        _id: false,
       },
     ],
     isReply: {
