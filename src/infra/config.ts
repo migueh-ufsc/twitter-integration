@@ -13,4 +13,12 @@ export abstract class Config {
       routingKeys: ['teste.key'],
     },
   ];
+
+  static readonly twitter = {
+    key: process.env.TWITTER_APP_KEY,
+    keySecret: process.env.TWITTER_APP_KEY,
+    token: process.env.TWITTER_ACCESS_TOKEN,
+    tokenSecret: process.env.TWITTER_ACCESS_SECRET,
+    bearerToken: process.env.TWITTER_BEARER_TOKEN,
+  };
 }
