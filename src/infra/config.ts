@@ -20,5 +20,9 @@ export abstract class Config {
     token: process.env.TWITTER_ACCESS_TOKEN,
     tokenSecret: process.env.TWITTER_ACCESS_SECRET,
     bearerToken: process.env.TWITTER_BEARER_TOKEN,
+    maxResults:
+      process.env.TWITTER_TIMELINE_MAX_RESULTS != null
+        ? Number(process.env.TWITTER_TIMELINE_MAX_RESULTS)
+        : 30,
   };
 }
