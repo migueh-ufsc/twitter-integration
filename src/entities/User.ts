@@ -13,8 +13,6 @@ export class User implements IUser {
   readonly nFollowing: number;
   readonly nTweets: number;
   accountDeletedAt: Date;
-  follows: IUser[];
-  isFollowedBy: IUser[];
   sampleTimeline: ITweet[];
 
   constructor(props: IUser) {

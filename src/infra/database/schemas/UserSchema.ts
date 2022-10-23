@@ -42,8 +42,6 @@ export const UserSchema = new Schema<IUser>(
       type: Number,
       default: 0,
     },
-    follows: [{ type: Types.ObjectId, ref: 'User' }],
-    isFollowedBy: [{ type: Types.ObjectId, ref: 'User' }],
     sampleTimeline: [{ type: Types.ObjectId, ref: 'Tweet' }],
   },
   schemaOptions,

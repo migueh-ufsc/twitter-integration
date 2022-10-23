@@ -12,7 +12,5 @@ export interface IUser {
   nFollowers: number;
   nFollowing: number;
   nTweets: number;
-  follows?: IUser[];
-  isFollowedBy?: IUser[];
   sampleTimeline?: ITweet[];
 }
