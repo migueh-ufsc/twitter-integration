@@ -1,8 +1,9 @@
+import { Tweet } from 'entities/Tweet';
 import { User } from 'entities/User';
 import { Config } from 'infra/config';
 import { TwitterApi } from 'twitter-api-v2';
-import { userParams } from './helpers/Params';
-import { twitterUserToUser } from './helpers/Parsers';
+import { timelineParams, userParams } from './helpers/Params';
+import { twitterTweetToTweet, twitterUserToUser } from './helpers/Parsers';
 
 export class TwitterClient {
   private static readonly client = new TwitterApi(Config.twitter.bearerToken);
@@ -28,6 +29,18 @@ export class TwitterClient {
     } catch (err: unknown) {
       throw err;
       //todo melhorar logs aqui
+    }
+  }
+
+  public static async getUserTweets(userId: string): Promise<Tweet[]> {
+    try {
+      const userTimeline = await TwitterClient.v2.userTimeline(
+        userId,
+        timelineParams,
+      );
+      return userTimeline.data.data.map(twitterTweetToTweet);
+    } catch (err: unknown) {
+      throw err;
     }
   }
 }
