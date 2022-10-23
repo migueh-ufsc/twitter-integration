@@ -1,4 +1,5 @@
 import { ITweet } from 'contracts/entities/ITweet';
+import { Tweet } from 'entities/Tweet';
 import { model, Schema } from 'mongoose';
 import { schemaOptions } from '../SchemaOptions';
 
@@ -49,7 +50,12 @@ export const TweetSchema = new Schema<ITweet>(
       type: String,
     },
   },
-  schemaOptions,
+  {
+    ...schemaOptions,
+    toObject: {
+      transform: (doc, ret) => new Tweet({ ...ret }),
+    },
+  },
 );
 
 export const TweetModel = model<ITweet>('Tweet', TweetSchema);
