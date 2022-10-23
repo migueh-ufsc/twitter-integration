@@ -10,6 +10,7 @@ export const UserSchema = new Schema<IUser>(
     },
     username: {
       type: String,
+      index: true,
     },
     name: {
       type: String,
