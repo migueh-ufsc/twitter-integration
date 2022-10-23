@@ -3,7 +3,7 @@ import { ITweet } from './ITweet';
 export interface IUser {
   id: string;
   username: string;
-  name?: string;
+  name: string;
   description?: string;
   location?: string;
   verified: boolean;
