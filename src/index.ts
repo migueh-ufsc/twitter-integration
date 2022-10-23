@@ -5,8 +5,6 @@ import { TwitterClient } from './twitter/TwitterClient';
 
 (async () => {
   Promise.all([Database.init(), Broker.init(), Server.init()]).then(
-    async () => {
-      await TwitterClient.validateConnection();
-    },
+    async () => {},
   );
 })();
