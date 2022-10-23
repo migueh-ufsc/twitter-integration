@@ -12,7 +12,7 @@ export class GetUserController implements BaseController {
     try {
       const { query } = request;
 
-      if (!query.id || !query.username)
+      if (!query.id && !query.username)
         throw new HttpError({
           status: 400,
           message:
