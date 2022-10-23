@@ -14,6 +14,7 @@ export const TweetSchema = new Schema<ITweet>(
     },
     authorId: {
       type: String,
+      index: true,
     },
     nRetweet: {
       type: Number,
