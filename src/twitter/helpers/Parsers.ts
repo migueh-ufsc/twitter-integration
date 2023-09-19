@@ -37,6 +37,7 @@ export const twitterTweetToTweet = (twitterTweet: TweetV2): Tweet => {
     entities,
     public_metrics,
     in_reply_to_user_id,
+    created_at,
   } = twitterTweet;
 
   const { retweet_count, like_count, reply_count, quote_count } =
@@ -69,5 +70,6 @@ export const twitterTweetToTweet = (twitterTweet: TweetV2): Tweet => {
     nLike: like_count,
     nReply: reply_count,
     nQuote: quote_count,
+    tweetCreatedAt: created_at as unknown as Date,
   });
 };
