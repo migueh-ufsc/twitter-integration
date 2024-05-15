@@ -5,7 +5,9 @@ export class CreateUserUseCase implements BaseUseCase {
   constructor(private userService: UserService) {}
 
   async execute(userData: any) {
-    const userAlreadyExists = await this.userService.findByUsername(userData.username);
+    const userAlreadyExists = await this.userService.findByUsername(
+      userData.username,
+    );
     if (userAlreadyExists) {
       throw new Error('Usuário já existe.');
     }
@@ -15,4 +17,3 @@ export class CreateUserUseCase implements BaseUseCase {
     return user;
   }
 }
-

@@ -19,6 +19,12 @@ router.get(
   ),
 );
 
-router.post('/', validate(createUserBodyValidator), requestHandlerMidd(new CreateUserController(new CreateUserUseCase(new UserService()))));
+router.post(
+  '/',
+  validate(createUserBodyValidator),
+  requestHandlerMidd(
+    new CreateUserController(new CreateUserUseCase(new UserService())),
+  ),
+);
 
 export default router;
