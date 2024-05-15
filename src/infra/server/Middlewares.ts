@@ -1,6 +1,7 @@
 import { HttpError } from 'common/errors/HttpError';
 import { BaseController } from 'contracts/controllers/BaseController';
 import { Request, Response, NextFunction, RequestHandler } from 'express';
+import Joi from 'joi';
 
 export const requestHandlerMidd = (
   controller: BaseController,
@@ -21,3 +22,14 @@ export const requestHandlerMidd = (
     }
   };
 };
+
+export const validate = (schema: Joi.Schema) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+      return res.status(400).json(error.details);
+    }
+    next();
+  };
+};
+
