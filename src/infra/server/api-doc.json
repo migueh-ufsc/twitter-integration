@@ -1,10 +1,13 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "API de Usuários",
     "version": "1.0.0",
     "description": "API para criação e obtenção de usuários."
   },
+  "host": "localhost:7001",
+  "basePath": "/",
+  "schemes": ["http"],
   "paths": {
     "/user": {
       "get": {
@@ -13,28 +16,8 @@
         "responses": {
           "200": {
             "description": "Usuário encontrado com sucesso.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "123"
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "John Doe"
-                    },
-                    "tweets": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           },
           "404": {
@@ -45,54 +28,21 @@
       "post": {
         "summary": "Criar Usuário",
         "description": "Cria um novo usuário.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "John Doe"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john.doe@example.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "password123"
-                  }
-                },
-                "required": ["name", "email", "password"]
-              }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        },
+        ],
         "responses": {
           "201": {
             "description": "Usuário criado com sucesso.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "123"
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "John Doe"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john.doe@example.com"
-                    }
-                  }
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -103,6 +53,135 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "nullable": true
+        },
+        "location": {
+          "type": "string",
+          "nullable": true
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "accountCreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "accountDeletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "nullable": true
+        },
+        "nFollowers": {
+          "type": "integer"
+        },
+        "nFollowing": {
+          "type": "integer"
+        },
+        "nTweets": {
+          "type": "integer"
+        },
+        "sampleTimeline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tweet"
+          },
+          "nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "name",
+        "verified",
+        "accountCreatedAt",
+        "nFollowers",
+        "nFollowing",
+        "nTweets"
+      ]
+    },
+    "Tweet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "nRetweet": {
+          "type": "integer"
+        },
+        "nReply": {
+          "type": "integer"
+        },
+        "nLike": {
+          "type": "integer"
+        },
+        "nQuote": {
+          "type": "integer"
+        },
+        "mentions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "nullable": true
+        },
+        "isReply": {
+          "type": "boolean"
+        },
+        "isRetweet": {
+          "type": "boolean"
+        },
+        "geolocation": {
+          "type": "string",
+          "nullable": true
+        },
+        "tweetCreatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "authorId",
+        "nRetweet",
+        "nReply",
+        "nLike",
+        "nQuote",
+        "isReply",
+        "isRetweet"
+      ]
     }
   }
 }
