@@ -1,3 +1,4 @@
+import { HttpError } from 'common/errors/HttpError';
 import { BaseUseCase } from 'contracts/usecases/BaseUseCase';
 import { UserService } from 'services/UserService';
 
@@ -9,7 +10,7 @@ export class CreateUserUseCase implements BaseUseCase {
       userData.username,
     );
     if (userAlreadyExists) {
-      throw new Error('Usuário já existe.');
+      throw new HttpError({ status: 400, message: 'Usuário já existe.' });
     }
 
     const user = await this.userService.create(userData);
